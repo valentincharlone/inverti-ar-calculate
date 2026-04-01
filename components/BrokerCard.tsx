@@ -27,11 +27,11 @@ export function BrokerCard({ ranking, index, isSelected = false, onToggle, canSe
       transition={{ delay: index * 0.07 }}
       className={`relative rounded-2xl border p-5 transition-all duration-200 hover:scale-[1.01] ${
         rank === 1
-          ? "bg-gradient-to-br from-emerald-900/40 to-slate-900 border-emerald-500/40"
+          ? "bg-linear-to-br from-emerald-900/40 to-slate-900 border-emerald-500/40"
           : rank === 2
-          ? "bg-gradient-to-br from-slate-800/60 to-slate-900 border-slate-600/40"
+          ? "bg-linear-to-br from-slate-800/60 to-slate-900 border-slate-600/40"
           : rank === 3
-          ? "bg-gradient-to-br from-amber-900/20 to-slate-900 border-amber-700/30"
+          ? "bg-linear-to-br from-amber-900/20 to-slate-900 border-amber-700/30"
           : "bg-slate-900/60 border-slate-700/30"
       }`}
     >

@@ -55,16 +55,16 @@ export function InstrumentSelector({ selected, onChange }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: i * 0.08 }}
           onClick={() => onChange(instrument.id)}
-          className={`relative flex flex-col items-start p-5 rounded-2xl border bg-gradient-to-br transition-all duration-200 text-left cursor-pointer group ${instrument.color} ${
+          className={`relative flex flex-col items-start p-5 rounded-lg  border bg-linear-to-br transition-all duration-200 text-left cursor-pointer group ${instrument.color} ${
             selected === instrument.id
-              ? "ring-2 ring-white/40 scale-[1.02] shadow-xl"
+              ? "ring-1  ring-white/40 scale-[1.02] shadow-xl"
               : "hover:scale-[1.01]"
           }`}
         >
           {selected === instrument.id && (
             <motion.div
               layoutId="selectedIndicator"
-              className="absolute inset-0 rounded-2xl bg-white/5"
+              className="absolute inset-0 rounded-lg bg-white/5"
             />
           )}
           <span className="text-3xl mb-3">{instrument.icon}</span>

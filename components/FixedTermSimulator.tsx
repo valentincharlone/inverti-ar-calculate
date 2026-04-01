@@ -19,20 +19,34 @@ interface Props {
   onDaysChange: (v: number) => void;
 }
 
-function calcRealGain(amount: number, annualRate: number, days: number, annualInflation: number): number {
+function calcRealGain(
+  amount: number,
+  annualRate: number,
+  days: number,
+  annualInflation: number,
+): number {
   const nominalFactor = 1 + (annualRate / 100 / 365) * days;
   const inflationFactor = Math.pow(1 + annualInflation / 100, days / 365);
   return amount * (nominalFactor / inflationFactor - 1);
 }
 
-export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange }: Props) {
+export function FixedTermSimulator({
+  amount,
+  days,
+  onAmountChange,
+  onDaysChange,
+}: Props) {
   const [showInflation, setShowInflation] = useState(false);
   const [inflationRate, setInflationRate] = useState("50");
   const [selectedBankIds, setSelectedBankIds] = useState<string[]>([]);
 
   const toggleBank = (id: string) => {
     setSelectedBankIds((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : prev.length < 3 ? [...prev, id] : prev
+      prev.includes(id)
+        ? prev.filter((x) => x !== id)
+        : prev.length < 3
+          ? [...prev, id]
+          : prev,
     );
   };
 
@@ -44,7 +58,8 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
     return rankBanks(banks, parsed, days);
   }, [amount, days]);
 
-  const parsedAmount = parseFloat(amount.replace(/\./g, "").replace(",", ".")) || 0;
+  const parsedAmount =
+    parseFloat(amount.replace(/\./g, "").replace(",", ".")) || 0;
 
   return (
     <div className="space-y-6">
@@ -83,7 +98,9 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Plazo</label>
+          <label className="block text-sm font-medium text-slate-300 mb-2">
+            Plazo
+          </label>
           <div className="grid grid-cols-5 gap-2">
             {DAY_OPTIONS.map((d) => (
               <button
@@ -119,7 +136,9 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
                 }`}
               />
             </button>
-            <span className="text-sm font-medium text-slate-300">Ajustar por inflación</span>
+            <span className="text-sm font-medium text-slate-300">
+              Ajustar por inflación
+            </span>
           </div>
 
           <AnimatePresence>
@@ -130,15 +149,21 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
                 exit={{ opacity: 0, width: 0 }}
                 className="flex items-center gap-2 overflow-hidden"
               >
-                <span className="text-xs text-slate-500 whitespace-nowrap">Inflación anual estimada</span>
+                <span className="text-xs text-slate-500 whitespace-nowrap">
+                  Inflación anual estimada
+                </span>
                 <div className="relative w-20">
                   <input
                     type="text"
                     value={inflationRate}
-                    onChange={(e) => setInflationRate(e.target.value.replace(/[^\d.]/g, ""))}
+                    onChange={(e) =>
+                      setInflationRate(e.target.value.replace(/[^\d.]/g, ""))
+                    }
                     className="w-full bg-slate-700/60 border border-slate-600/50 rounded-lg px-2 py-1 pr-6 text-white text-sm text-right focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition-all"
                   />
-                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 text-xs">%</span>
+                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 text-xs">
+                    %
+                  </span>
                 </div>
               </motion.div>
             )}
@@ -147,7 +172,12 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
 
         {showInflation && (
           <p className="text-xs text-slate-500 mt-2">
-            Muestra cuánto ganás <strong className="text-slate-400">por encima de la inflación</strong>. Si es negativo, el plazo fijo no alcanza a cubrir la suba de precios.
+            Muestra cuánto ganás{" "}
+            <strong className="text-slate-400">
+              por encima de la inflación
+            </strong>
+            . Si es negativo, el plazo fijo no alcanza a cubrir la suba de
+            precios.
           </p>
         )}
       </div>
@@ -180,7 +210,10 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
                 inflationRate={parsedInflation}
                 isSelected={selectedBankIds.includes(ranking.bank.id)}
                 onToggle={() => toggleBank(ranking.bank.id)}
-                canSelect={selectedBankIds.length < 3 || selectedBankIds.includes(ranking.bank.id)}
+                canSelect={
+                  selectedBankIds.length < 3 ||
+                  selectedBankIds.includes(ranking.bank.id)
+                }
               />
             ))}
 
@@ -199,7 +232,11 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
                     </p>
                   ) : (
                     <BankComparison
-                      banks={banks.filter((b) => selectedBankIds.includes(b.id)) as Bank[]}
+                      banks={
+                        banks.filter((b) =>
+                          selectedBankIds.includes(b.id),
+                        ) as Bank[]
+                      }
                       amount={parsedAmount}
                       days={days}
                       onClose={() => setSelectedBankIds([])}
@@ -232,10 +269,13 @@ function BankRow({
   onToggle: () => void;
   canSelect: boolean;
 }) {
-  const { bank, rate, estimatedGain, totalAmount, rank, badges, amount, days } = ranking;
+  const { bank, rate, estimatedGain, totalAmount, rank, badges, amount, days } =
+    ranking;
   const isFirst = rank === 1;
 
-  const realGain = showInflation ? calcRealGain(amount, rate, days, inflationRate) : null;
+  const realGain = showInflation
+    ? calcRealGain(amount, rate, days, inflationRate)
+    : null;
   const beatsInflation = realGain !== null && realGain >= 0;
 
   return (
@@ -245,7 +285,7 @@ function BankRow({
       transition={{ delay: index * 0.05 }}
       className={`rounded-xl border px-4 py-3.5 transition-all ${
         isFirst
-          ? "bg-gradient-to-r from-teal-900/30 to-slate-900 border-teal-500/40"
+          ? "bg-linear-to-r from-teal-900/30 to-slate-900 border-teal-500/40"
           : "bg-slate-800/40 border-slate-700/30"
       }`}
     >
@@ -273,8 +313,12 @@ function BankRow({
         {/* Rate */}
         <div className="text-center shrink-0">
           <div className="flex items-center gap-1">
-            <TrendingUp className={`w-3 h-3 ${isFirst ? "text-teal-400" : "text-slate-400"}`} />
-            <span className={`font-bold text-base ${isFirst ? "text-teal-400" : "text-slate-200"}`}>
+            <TrendingUp
+              className={`w-3 h-3 ${isFirst ? "text-teal-400" : "text-slate-400"}`}
+            />
+            <span
+              className={`font-bold text-base ${isFirst ? "text-teal-400" : "text-slate-200"}`}
+            >
               {rate}%
             </span>
           </div>
@@ -283,8 +327,12 @@ function BankRow({
 
         {/* Nominal gain */}
         <div className="text-right shrink-0">
-          <p className="text-emerald-400 font-semibold text-sm">+{formatARS(estimatedGain)}</p>
-          <p className="text-xs text-slate-500">{formatARS(totalAmount)} total</p>
+          <p className="text-emerald-400 font-semibold text-sm">
+            +{formatARS(estimatedGain)}
+          </p>
+          <p className="text-xs text-slate-500">
+            {formatARS(totalAmount)} total
+          </p>
         </div>
 
         {/* Select button */}
@@ -296,11 +344,15 @@ function BankRow({
             isSelected
               ? "bg-blue-600 border-blue-500 text-white"
               : canSelect
-              ? "border-slate-600 text-slate-500 hover:border-blue-400 hover:text-blue-400"
-              : "border-slate-800 text-slate-700 cursor-not-allowed"
+                ? "border-slate-600 text-slate-500 hover:border-blue-400 hover:text-blue-400"
+                : "border-slate-800 text-slate-700 cursor-not-allowed"
           }`}
         >
-          {isSelected ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+          {isSelected ? (
+            <Check className="w-3.5 h-3.5" />
+          ) : (
+            <Plus className="w-3.5 h-3.5" />
+          )}
         </button>
       </div>
 
@@ -320,11 +372,16 @@ function BankRow({
                 ) : (
                   <TrendingDown className="w-3.5 h-3.5 text-rose-400" />
                 )}
-                <span className="text-xs text-slate-400">Ganancia real (vs inflación {inflationRate}%)</span>
+                <span className="text-xs text-slate-400">
+                  Ganancia real (vs inflación {inflationRate}%)
+                </span>
               </div>
               <div className="text-right">
-                <span className={`text-sm font-semibold ${beatsInflation ? "text-violet-400" : "text-rose-400"}`}>
-                  {beatsInflation ? "+" : ""}{formatARS(realGain)}
+                <span
+                  className={`text-sm font-semibold ${beatsInflation ? "text-violet-400" : "text-rose-400"}`}
+                >
+                  {beatsInflation ? "+" : ""}
+                  {formatARS(realGain)}
                 </span>
                 {!beatsInflation && (
                   <p className="text-xs text-rose-500/70">No cubre inflación</p>

@@ -19,7 +19,7 @@ export function RecommendationBox({ rankings, instrument }: Props) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-900/20 to-slate-900 p-5"
+      className="rounded-2xl border border-amber-500/30 bg-linear-to-br from-amber-900/20 to-slate-900 p-5"
     >
       <div className="flex items-center gap-2 mb-4">
         <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center">

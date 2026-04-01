@@ -1,6 +1,6 @@
 export function BestDecisionToday() {
   return (
-    <section className="mt-16 rounded-2xl border border-slate-800/60 bg-gradient-to-br from-slate-900 to-slate-950 p-6 sm:p-8">
+    <section className="mt-16 rounded-lg   border border-slate-800/60 bg-linear-to-br from-slate-900 to-slate-950 p-6 sm:p-8">
       <div className="flex items-center gap-2 mb-6">
         <span className="text-2xl">⚡</span>
         <h2 className="text-xl font-semibold text-white">Mejor decisión hoy</h2>
@@ -34,8 +34,8 @@ export function BestDecisionToday() {
       </div>
 
       <p className="text-xs text-slate-600 mt-5">
-        * Las recomendaciones se basan en datos de mercado aproximados y no constituyen asesoramiento
-        financiero. Consultá un asesor certificado.
+        * Las recomendaciones se basan en datos de mercado aproximados y no
+        constituyen asesoramiento financiero. Consultá un asesor certificado.
       </p>
     </section>
   );
@@ -60,7 +60,9 @@ function DecisionCard({
     <div className="rounded-xl bg-slate-800/30 border border-slate-700/30 p-4">
       <div className="flex items-start justify-between mb-3">
         <span className="text-xl">{emoji}</span>
-        <span className={`text-xs px-2 py-0.5 rounded-full border font-medium ${badgeColor}`}>
+        <span
+          className={`text-xs px-2 py-0.5 rounded-full border font-medium ${badgeColor}`}
+        >
           {badge}
         </span>
       </div>

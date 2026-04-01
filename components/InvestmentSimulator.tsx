@@ -122,7 +122,7 @@ export function InvestmentSimulator({ amount, days, onAmountChange, onDaysChange
                   transition={{ delay: i * 0.07 }}
                   className={`rounded-xl border p-4 ${
                     i === 0
-                      ? "bg-gradient-to-br from-slate-800/80 to-slate-900 border-slate-600/60"
+                      ? "bg-linear-to-br from-slate-800/80 to-slate-900 border-slate-600/60"
                       : "bg-slate-900/60 border-slate-800/40"
                   }`}
                 >
@@ -148,7 +148,7 @@ export function InvestmentSimulator({ amount, days, onAmountChange, onDaysChange
                       initial={{ width: 0 }}
                       animate={{ width: `${barWidth}%` }}
                       transition={{ delay: i * 0.07 + 0.2, duration: 0.6, ease: "easeOut" }}
-                      className={`h-full rounded-full bg-gradient-to-r ${gradient}`}
+                      className={`h-full rounded-full bg-linear-to-r ${gradient}`}
                     />
                   </div>
 

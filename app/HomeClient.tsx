@@ -101,7 +101,7 @@ export function HomeClient() {
               <h2 className="text-xl font-semibold text-white">{SECTION_LABELS[selected]}</h2>
               <button
                 onClick={handleShare}
-                className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-400 hover:text-slate-200 hover:border-slate-600/50 transition-all"
+                className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md bg-slate-800/60 border border-slate-700/50 text-slate-400 hover:text-slate-200 hover:border-slate-600/50 transition-all"
               >
                 {copied ? (
                   <>
@@ -119,12 +119,12 @@ export function HomeClient() {
 
             {/* Tab switcher for plazo fijo */}
             {selected === "plazo-fijo" && (
-              <div className="flex gap-2 mb-6 bg-slate-900/60 rounded-xl p-1 border border-slate-800/60 w-fit">
+              <div className="flex gap-2 mb-6 bg-slate-900/60 rounded-md p-1 border border-slate-800/60 w-fit">
                 {(["ranking", "simulator"] as const).map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150 ${
+                    className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-150 ${
                       activeTab === tab
                         ? "bg-blue-600 text-white shadow-md"
                         : "text-slate-400 hover:text-slate-200"
@@ -138,7 +138,7 @@ export function HomeClient() {
 
             {/* Content panels */}
             {selected === "plazo-fijo" ? (
-              <div className="rounded-2xl border border-slate-800/60 bg-slate-900/40 p-6">
+              <div className="rounded-lg border border-slate-800/60 bg-slate-900/40 p-6">
                 <AnimatePresence mode="wait">
                   {activeTab === "ranking" ? (
                     <motion.div
