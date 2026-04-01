@@ -45,13 +45,13 @@ export function BankComparison({ banks, amount, days, onClose }: Props) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 8 }}
-      className="rounded-2xl border border-blue-500/20 bg-slate-900/80 overflow-hidden"
+      className="rounded border border-slate-700 bg-slate-900 overflow-hidden"
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-3 border-b border-slate-800/60 bg-blue-950/30">
+      <div className="flex items-center justify-between px-5 py-3 border-b border-slate-800 bg-slate-800">
         <span className="text-sm font-semibold text-white">
           Comparando {banks.length} {banks.length === 1 ? "banco" : "bancos"}
         </span>
@@ -63,7 +63,7 @@ export function BankComparison({ banks, amount, days, onClose }: Props) {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-slate-800/60">
+            <tr className="border-b border-slate-800">
               <th className="text-left px-5 py-3 text-slate-500 font-medium w-36" />
               {banks.map((bank) => (
                 <th key={bank.id} className="px-5 py-3 text-center font-semibold text-white">
@@ -74,16 +74,15 @@ export function BankComparison({ banks, amount, days, onClose }: Props) {
             </tr>
           </thead>
           <tbody>
-            {/* TNA per period */}
             {RATE_PERIODS.map(({ label, key }) => {
               const values = banks.map((b) => b.fixedTermRates[key]);
               const best = bestIndex(values);
               return (
-                <tr key={key} className="border-b border-slate-800/30 hover:bg-slate-800/20 transition-colors">
-                  <td className="px-5 py-2.5 text-slate-400">{label}</td>
+                <tr key={key} className="border-b border-slate-800 hover:bg-slate-800/50 transition-colors">
+                  <td className="px-5 py-2.5 text-slate-400 text-xs uppercase tracking-wide font-medium">{label}</td>
                   {values.map((v, i) => (
                     <td key={i} className="px-5 py-2.5 text-center">
-                      <span className={i === best ? "font-bold text-teal-400" : "text-slate-300"}>
+                      <span className={i === best ? "font-bold text-blue-400" : "text-slate-300"}>
                         {v}%{i === best && banks.length > 1 && " ★"}
                       </span>
                     </td>
@@ -92,23 +91,21 @@ export function BankComparison({ banks, amount, days, onClose }: Props) {
               );
             })}
 
-            {/* Divider */}
-            <tr className="border-b border-slate-700/60 bg-slate-800/20">
-              <td colSpan={banks.length + 1} className="px-5 py-1.5">
+            <tr className="border-b border-slate-700 bg-slate-800">
+              <td colSpan={banks.length + 1} className="px-5 py-2">
                 <span className="text-xs text-slate-500 uppercase tracking-wider">
                   Para {formatARS(amount)} a {days} días
                 </span>
               </td>
             </tr>
 
-            {/* Gain */}
-            <tr className="border-b border-slate-800/30 hover:bg-slate-800/20 transition-colors">
-              <td className="px-5 py-2.5 text-slate-400">Ganancia</td>
+            <tr className="border-b border-slate-800 hover:bg-slate-800/50 transition-colors">
+              <td className="px-5 py-2.5 text-slate-400 text-xs uppercase tracking-wide font-medium">Ganancia</td>
               {gains.map(({ gain: g }, i) => {
                 const best = bestIndex(gains.map((x) => x.gain));
                 return (
                   <td key={i} className="px-5 py-2.5 text-center">
-                    <span className={i === best ? "font-bold text-emerald-400" : "text-slate-300"}>
+                    <span className={i === best ? "font-bold text-green-400" : "text-slate-300"}>
                       +{formatARS(g)}{i === best && banks.length > 1 && " ★"}
                     </span>
                   </td>
@@ -116,9 +113,8 @@ export function BankComparison({ banks, amount, days, onClose }: Props) {
               })}
             </tr>
 
-            {/* Total */}
-            <tr className="hover:bg-slate-800/20 transition-colors">
-              <td className="px-5 py-2.5 text-slate-400">Total a cobrar</td>
+            <tr className="hover:bg-slate-800/50 transition-colors">
+              <td className="px-5 py-2.5 text-slate-400 text-xs uppercase tracking-wide font-medium">Total a cobrar</td>
               {gains.map(({ gain: g }, i) => {
                 const best = bestIndex(gains.map((x) => x.gain));
                 return (

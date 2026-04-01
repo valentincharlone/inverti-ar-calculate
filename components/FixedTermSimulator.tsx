@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TrendingUp, Award, TrendingDown, Plus, Check } from "lucide-react";
+import { TrendingUp, TrendingDown, Award, Plus, Check } from "lucide-react";
 import { Badge } from "./Badge";
 import { BankComparison } from "./BankComparison";
 import { rankBanks } from "@/lib/ranking";
@@ -51,11 +51,11 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
       {/* Inputs */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-xs font-medium text-slate-400 mb-2 uppercase tracking-wide">
             Monto a invertir (ARS)
           </label>
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium text-sm">
               $
             </span>
             <input
@@ -65,16 +65,16 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
                 const raw = e.target.value.replace(/[^\d]/g, "");
                 onAmountChange(raw);
               }}
-              className="w-full bg-slate-800/60 border border-slate-700/50 rounded-xl pl-8 pr-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
+              className="w-full bg-slate-800 border border-slate-700 rounded pl-7 pr-4 py-2.5 text-white text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all"
               placeholder="100000"
             />
           </div>
-          <div className="flex gap-2 mt-2 flex-wrap">
+          <div className="flex gap-1.5 mt-2 flex-wrap">
             {[50000, 100000, 500000, 1000000].map((amt) => (
               <button
                 key={amt}
                 onClick={() => onAmountChange(String(amt))}
-                className="text-xs px-2 py-1 rounded-lg bg-slate-700/50 text-slate-300 hover:bg-slate-600/50 transition-colors"
+                className="text-xs px-2 py-1 rounded bg-slate-800 border border-slate-700 text-slate-400 hover:text-slate-200 hover:border-slate-500 transition-colors"
               >
                 {formatARS(amt)}
               </button>
@@ -83,16 +83,16 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Plazo</label>
-          <div className="grid grid-cols-5 gap-2">
+          <label className="block text-xs font-medium text-slate-400 mb-2 uppercase tracking-wide">Plazo</label>
+          <div className="grid grid-cols-5 gap-1.5">
             {DAY_OPTIONS.map((d) => (
               <button
                 key={d}
                 onClick={() => onDaysChange(d)}
-                className={`py-3 rounded-xl text-sm font-medium transition-all duration-150 ${
+                className={`py-2.5 rounded text-sm font-medium transition-colors duration-100 border ${
                   days === d
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
-                    : "bg-slate-800/60 border border-slate-700/50 text-slate-300 hover:border-blue-500/40"
+                    ? "bg-blue-600 border-blue-600 text-white"
+                    : "bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-500 hover:text-slate-200"
                 }`}
               >
                 {d}d
@@ -103,13 +103,13 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
       </div>
 
       {/* Inflation toggle */}
-      <div className="rounded-xl border border-slate-700/40 bg-slate-800/30 px-4 py-3">
+      <div className="rounded border border-slate-700 bg-slate-800 px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowInflation((v) => !v)}
               className={`relative w-9 h-5 rounded-full transition-colors duration-200 ${
-                showInflation ? "bg-violet-600" : "bg-slate-700"
+                showInflation ? "bg-blue-600" : "bg-slate-600"
               }`}
               aria-label="Ajustar por inflación"
             >
@@ -119,7 +119,7 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
                 }`}
               />
             </button>
-            <span className="text-sm font-medium text-slate-300">Ajustar por inflación</span>
+            <span className="text-sm text-slate-300">Ajustar por inflación</span>
           </div>
 
           <AnimatePresence>
@@ -136,7 +136,7 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
                     type="text"
                     value={inflationRate}
                     onChange={(e) => setInflationRate(e.target.value.replace(/[^\d.]/g, ""))}
-                    className="w-full bg-slate-700/60 border border-slate-600/50 rounded-lg px-2 py-1 pr-6 text-white text-sm text-right focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition-all"
+                    className="w-full bg-slate-700 border border-slate-600 rounded px-2 py-1 pr-6 text-white text-sm text-right focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all"
                   />
                   <span className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 text-xs">%</span>
                 </div>
@@ -157,13 +157,13 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
         {rankings.length > 0 && parsedAmount > 0 && (
           <motion.div
             key={`${amount}-${days}`}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="space-y-3"
+            className="space-y-2"
           >
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-medium text-slate-400">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-xs font-medium text-slate-400 uppercase tracking-wide">
                 Ranking de bancos — {days} días
               </h3>
               <span className="text-xs text-slate-500">
@@ -240,22 +240,22 @@ function BankRow({
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: -10 }}
+      initial={{ opacity: 0, x: -8 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.05 }}
-      className={`rounded-xl border px-4 py-3.5 transition-all ${
+      transition={{ delay: index * 0.04 }}
+      className={`rounded border px-4 py-3.5 transition-colors ${
         isFirst
-          ? "bg-gradient-to-r from-teal-900/30 to-slate-900 border-teal-500/40"
-          : "bg-slate-800/40 border-slate-700/30"
+          ? "bg-slate-900 border-blue-500/50"
+          : "bg-slate-900 border-slate-800"
       }`}
     >
       <div className="flex items-center gap-4">
         {/* Rank */}
-        <div className="w-8 text-center shrink-0">
+        <div className="w-7 text-center shrink-0">
           {isFirst ? (
-            <Award className="w-5 h-5 text-teal-400 mx-auto" />
+            <Award className="w-4 h-4 text-blue-400 mx-auto" />
           ) : (
-            <span className="text-slate-500 text-sm font-medium">#{rank}</span>
+            <span className="text-slate-500 text-sm font-medium tabular-nums">#{rank}</span>
           )}
         </div>
 
@@ -273,8 +273,8 @@ function BankRow({
         {/* Rate */}
         <div className="text-center shrink-0">
           <div className="flex items-center gap-1">
-            <TrendingUp className={`w-3 h-3 ${isFirst ? "text-teal-400" : "text-slate-400"}`} />
-            <span className={`font-bold text-base ${isFirst ? "text-teal-400" : "text-slate-200"}`}>
+            <TrendingUp className={`w-3 h-3 ${isFirst ? "text-blue-400" : "text-slate-500"}`} />
+            <span className={`font-bold text-sm tabular-nums ${isFirst ? "text-blue-400" : "text-slate-200"}`}>
               {rate}%
             </span>
           </div>
@@ -283,7 +283,7 @@ function BankRow({
 
         {/* Nominal gain */}
         <div className="text-right shrink-0">
-          <p className="text-emerald-400 font-semibold text-sm">+{formatARS(estimatedGain)}</p>
+          <p className="text-green-400 font-semibold text-sm tabular-nums">+{formatARS(estimatedGain)}</p>
           <p className="text-xs text-slate-500">{formatARS(totalAmount)} total</p>
         </div>
 
@@ -292,7 +292,7 @@ function BankRow({
           onClick={onToggle}
           disabled={!canSelect}
           title={isSelected ? "Quitar de comparación" : "Agregar a comparación"}
-          className={`shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition-all duration-150 ${
+          className={`shrink-0 w-7 h-7 rounded border flex items-center justify-center transition-colors duration-150 ${
             isSelected
               ? "bg-blue-600 border-blue-500 text-white"
               : canSelect
@@ -313,21 +313,21 @@ function BankRow({
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden"
           >
-            <div className="mt-3 pt-3 border-t border-slate-700/40 flex items-center justify-between">
+            <div className="mt-3 pt-3 border-t border-slate-700 flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 {beatsInflation ? (
-                  <TrendingUp className="w-3.5 h-3.5 text-violet-400" />
+                  <TrendingUp className="w-3.5 h-3.5 text-slate-400" />
                 ) : (
-                  <TrendingDown className="w-3.5 h-3.5 text-rose-400" />
+                  <TrendingDown className="w-3.5 h-3.5 text-red-400" />
                 )}
-                <span className="text-xs text-slate-400">Ganancia real (vs inflación {inflationRate}%)</span>
+                <span className="text-xs text-slate-500">Ganancia real (vs inflación {inflationRate}%)</span>
               </div>
               <div className="text-right">
-                <span className={`text-sm font-semibold ${beatsInflation ? "text-violet-400" : "text-rose-400"}`}>
+                <span className={`text-sm font-semibold tabular-nums ${beatsInflation ? "text-slate-200" : "text-red-400"}`}>
                   {beatsInflation ? "+" : ""}{formatARS(realGain)}
                 </span>
                 {!beatsInflation && (
-                  <p className="text-xs text-rose-500/70">No cubre inflación</p>
+                  <p className="text-xs text-red-500/70">No cubre inflación</p>
                 )}
               </div>
             </div>

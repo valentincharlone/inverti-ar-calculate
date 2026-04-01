@@ -1,42 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Building2, Globe, BarChart2, FileText } from "lucide-react";
 import type { InstrumentType } from "@/types";
 
 const INSTRUMENTS: {
   id: InstrumentType;
   label: string;
   description: string;
-  icon: string;
-  color: string;
+  icon: React.ReactNode;
 }[] = [
   {
     id: "plazo-fijo",
     label: "Plazo Fijo",
     description: "Rendimiento fijo garantizado en pesos",
-    icon: "🏦",
-    color: "from-blue-600/30 to-blue-500/10 border-blue-500/40 hover:border-blue-400",
+    icon: <Building2 className="w-5 h-5" />,
   },
   {
     id: "cedears",
     label: "CEDEARs",
     description: "Acciones extranjeras desde Argentina",
-    icon: "🌎",
-    color: "from-violet-600/30 to-violet-500/10 border-violet-500/40 hover:border-violet-400",
+    icon: <Globe className="w-5 h-5" />,
   },
   {
     id: "acciones",
     label: "Acciones",
     description: "Empresas argentinas en bolsa",
-    icon: "📈",
-    color: "from-emerald-600/30 to-emerald-500/10 border-emerald-500/40 hover:border-emerald-400",
+    icon: <BarChart2 className="w-5 h-5" />,
   },
   {
     id: "bonos",
     label: "Bonos",
     description: "Deuda soberana y corporativa",
-    icon: "📄",
-    color: "from-amber-600/30 to-amber-500/10 border-amber-500/40 hover:border-amber-400",
+    icon: <FileText className="w-5 h-5" />,
   },
 ];
 
@@ -47,32 +43,25 @@ interface Props {
 
 export function InstrumentSelector({ selected, onChange }: Props) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
       {INSTRUMENTS.map((instrument, i) => (
         <motion.button
           key={instrument.id}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.08 }}
+          transition={{ delay: i * 0.06 }}
           onClick={() => onChange(instrument.id)}
-          className={`relative flex flex-col items-start p-5 rounded-2xl border bg-gradient-to-br transition-all duration-200 text-left cursor-pointer group ${instrument.color} ${
+          className={`flex flex-col items-start p-4 rounded border transition-colors duration-150 text-left cursor-pointer ${
             selected === instrument.id
-              ? "ring-2 ring-white/40 scale-[1.02] shadow-xl"
-              : "hover:scale-[1.01]"
+              ? "bg-slate-800 border-blue-500 text-white"
+              : "bg-slate-900 border-slate-800 text-slate-300 hover:border-slate-600 hover:bg-slate-800/70"
           }`}
         >
-          {selected === instrument.id && (
-            <motion.div
-              layoutId="selectedIndicator"
-              className="absolute inset-0 rounded-2xl bg-white/5"
-            />
-          )}
-          <span className="text-3xl mb-3">{instrument.icon}</span>
-          <span className="font-semibold text-white text-base">{instrument.label}</span>
-          <span className="text-xs text-white/50 mt-1 leading-snug">{instrument.description}</span>
-          {selected === instrument.id && (
-            <span className="absolute top-3 right-3 w-2 h-2 rounded-full bg-white/70" />
-          )}
+          <span className={`mb-3 ${selected === instrument.id ? "text-blue-400" : "text-slate-500"}`}>
+            {instrument.icon}
+          </span>
+          <span className="font-semibold text-white text-sm">{instrument.label}</span>
+          <span className="text-xs text-slate-500 mt-1 leading-snug">{instrument.description}</span>
         </motion.button>
       ))}
     </div>

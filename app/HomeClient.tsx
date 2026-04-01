@@ -55,18 +55,18 @@ export function HomeClient() {
       {/* Hero */}
       <section className="pt-12 pb-10 text-center">
         <motion.div
-          initial={{ opacity: 0, y: -16 }}
+          initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <span className="inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+          <span className="inline-flex items-center gap-2 text-xs font-medium px-3 py-1 rounded bg-slate-800 text-slate-400 border border-slate-700 mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
             Datos de mercado argentino
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
             ¿Dónde invertís hoy?
           </h1>
-          <p className="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-slate-400 text-base max-w-xl mx-auto leading-relaxed">
             Compará bancos y brokers en segundos. Encontrá la mejor opción según el instrumento que
             elijas.
           </p>
@@ -78,10 +78,10 @@ export function HomeClient() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-sm font-medium text-slate-400 mb-4 text-center"
+          transition={{ delay: 0.2 }}
+          className="text-xs font-medium text-slate-500 mb-3 uppercase tracking-wide"
         >
-          ¿Qué querés hacer?
+          Instrumento
         </motion.p>
         <InstrumentSelector selected={selected} onChange={setSelected} />
       </section>
@@ -91,22 +91,22 @@ export function HomeClient() {
         {selected && (
           <motion.section
             key={selected}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.35 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
           >
             {/* Section header */}
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-white">{SECTION_LABELS[selected]}</h2>
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide">{SECTION_LABELS[selected]}</h2>
               <button
                 onClick={handleShare}
-                className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-400 hover:text-slate-200 hover:border-slate-600/50 transition-all"
+                className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded border border-slate-700 bg-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-600 transition-colors"
               >
                 {copied ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-emerald-400">¡Copiado!</span>
+                    <Check className="w-3.5 h-3.5 text-green-400" />
+                    <span className="text-green-400">Copiado</span>
                   </>
                 ) : (
                   <>
@@ -119,15 +119,15 @@ export function HomeClient() {
 
             {/* Tab switcher for plazo fijo */}
             {selected === "plazo-fijo" && (
-              <div className="flex gap-2 mb-6 bg-slate-900/60 rounded-xl p-1 border border-slate-800/60 w-fit">
+              <div className="flex gap-px mb-5 bg-slate-800 border border-slate-700 rounded w-fit overflow-hidden">
                 {(["ranking", "simulator"] as const).map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150 ${
+                    className={`px-4 py-2 text-sm font-medium transition-colors duration-100 ${
                       activeTab === tab
-                        ? "bg-blue-600 text-white shadow-md"
-                        : "text-slate-400 hover:text-slate-200"
+                        ? "bg-blue-600 text-white"
+                        : "text-slate-400 hover:text-slate-200 hover:bg-slate-700"
                     }`}
                   >
                     {tab === "ranking" ? "Comparar bancos" : "Simular ganancia"}
@@ -138,7 +138,7 @@ export function HomeClient() {
 
             {/* Content panels */}
             {selected === "plazo-fijo" ? (
-              <div className="rounded-2xl border border-slate-800/60 bg-slate-900/40 p-6">
+              <div className="rounded border border-slate-800 bg-slate-900 p-6">
                 <AnimatePresence mode="wait">
                   {activeTab === "ranking" ? (
                     <motion.div
@@ -183,12 +183,11 @@ export function HomeClient() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.4 }}
           className="text-center py-16"
         >
-          <div className="text-5xl mb-4">👆</div>
-          <p className="text-slate-500 text-base">
-            Seleccioná un instrumento arriba para ver las mejores opciones
+          <p className="text-slate-600 text-sm">
+            Seleccioná un instrumento para ver las mejores opciones
           </p>
         </motion.div>
       )}

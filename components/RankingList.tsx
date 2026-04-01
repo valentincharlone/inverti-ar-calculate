@@ -86,15 +86,15 @@ export function RankingList({ instrument }: Props) {
 
           <div className="flex flex-wrap gap-2 sm:ml-auto">
             {/* Level filter */}
-            <div className="flex gap-1 bg-slate-900/60 rounded-lg p-0.5 border border-slate-800/60">
+            <div className="flex gap-px bg-slate-800 border border-slate-700 rounded overflow-hidden">
               {LEVEL_OPTIONS.map((opt) => (
                 <button
                   key={opt.value}
                   onClick={() => setLevelFilter(opt.value)}
-                  className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all duration-150 ${
+                  className={`px-2.5 py-1.5 text-xs font-medium transition-colors duration-100 ${
                     levelFilter === opt.value
-                      ? "bg-slate-700 text-white"
-                      : "text-slate-500 hover:text-slate-300"
+                      ? "bg-slate-600 text-white"
+                      : "text-slate-500 hover:text-slate-300 hover:bg-slate-700"
                   }`}
                 >
                   {opt.label}
@@ -103,15 +103,15 @@ export function RankingList({ instrument }: Props) {
             </div>
 
             {/* Sort order */}
-            <div className="flex gap-1 bg-slate-900/60 rounded-lg p-0.5 border border-slate-800/60">
+            <div className="flex gap-px bg-slate-800 border border-slate-700 rounded overflow-hidden">
               {SORT_OPTIONS.map((opt) => (
                 <button
                   key={opt.value}
                   onClick={() => setSortOrder(opt.value)}
-                  className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all duration-150 ${
+                  className={`px-2.5 py-1.5 text-xs font-medium transition-colors duration-100 ${
                     sortOrder === opt.value
-                      ? "bg-slate-700 text-white"
-                      : "text-slate-500 hover:text-slate-300"
+                      ? "bg-slate-600 text-white"
+                      : "text-slate-500 hover:text-slate-300 hover:bg-slate-700"
                   }`}
                 >
                   {opt.label}
@@ -143,7 +143,7 @@ export function RankingList({ instrument }: Props) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3"
             >
               {filtered.map((ranking, i) => (
                 <BrokerCard
@@ -161,7 +161,7 @@ export function RankingList({ instrument }: Props) {
               key="empty"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-12 rounded-2xl border border-slate-800/40 bg-slate-900/20"
+              className="text-center py-12 rounded border border-slate-800 bg-slate-900"
             >
               <p className="text-slate-500 text-sm">
                 Ningún broker coincide con los filtros seleccionados.

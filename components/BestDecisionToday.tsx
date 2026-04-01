@@ -1,35 +1,33 @@
+import { Landmark, Globe, Shield } from "lucide-react";
+
 export function BestDecisionToday() {
   return (
-    <section className="mt-16 rounded-2xl border border-slate-800/60 bg-gradient-to-br from-slate-900 to-slate-950 p-6 sm:p-8">
-      <div className="flex items-center gap-2 mb-6">
-        <span className="text-2xl">⚡</span>
-        <h2 className="text-xl font-semibold text-white">Mejor decisión hoy</h2>
+    <section className="mt-16 rounded border border-slate-800 bg-slate-900 p-6 sm:p-8">
+      <div className="flex items-center gap-2 mb-6 pb-4 border-b border-slate-800">
+        <h2 className="text-base font-semibold text-white uppercase tracking-wide">Mejor decisión hoy</h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <DecisionCard
-          emoji="🏦"
+          icon={<Landmark className="w-4 h-4 text-slate-400" />}
           title="Plazo fijo"
           highlight="Brubank"
           detail="TNA 40% — el mayor del mercado"
           badge="Mejor tasa"
-          badgeColor="text-teal-400 bg-teal-900/30 border-teal-700/30"
         />
         <DecisionCard
-          emoji="🌎"
+          icon={<Globe className="w-4 h-4 text-slate-400" />}
           title="CEDEARs / Acciones"
           highlight="Cocos Capital"
           detail="Sin comisiones + mejor app del mercado"
           badge="Sin comisión"
-          badgeColor="text-emerald-400 bg-emerald-900/30 border-emerald-700/30"
         />
         <DecisionCard
-          emoji="📊"
+          icon={<Shield className="w-4 h-4 text-slate-400" />}
           title="Perfil conservador"
           highlight="Plazo fijo UVA"
           detail="Cubrís inflación + tasa adicional"
           badge="Cobertura inflación"
-          badgeColor="text-violet-400 bg-violet-900/30 border-violet-700/30"
         />
       </div>
 
@@ -42,30 +40,28 @@ export function BestDecisionToday() {
 }
 
 function DecisionCard({
-  emoji,
+  icon,
   title,
   highlight,
   detail,
   badge,
-  badgeColor,
 }: {
-  emoji: string;
+  icon: React.ReactNode;
   title: string;
   highlight: string;
   detail: string;
   badge: string;
-  badgeColor: string;
 }) {
   return (
-    <div className="rounded-xl bg-slate-800/30 border border-slate-700/30 p-4">
+    <div className="rounded border border-slate-800 bg-slate-800/40 p-4">
       <div className="flex items-start justify-between mb-3">
-        <span className="text-xl">{emoji}</span>
-        <span className={`text-xs px-2 py-0.5 rounded-full border font-medium ${badgeColor}`}>
+        <span>{icon}</span>
+        <span className="text-xs px-2 py-0.5 rounded bg-slate-800 border border-slate-700 font-medium text-slate-400">
           {badge}
         </span>
       </div>
-      <p className="text-xs text-slate-500 mb-1">{title}</p>
-      <p className="font-semibold text-white text-base">{highlight}</p>
+      <p className="text-xs text-slate-500 mb-1 uppercase tracking-wide">{title}</p>
+      <p className="font-semibold text-white text-sm">{highlight}</p>
       <p className="text-xs text-slate-400 mt-1">{detail}</p>
     </div>
   );
