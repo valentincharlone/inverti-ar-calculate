@@ -115,7 +115,7 @@ export function FixedTermSimulator({ amount, days, onAmountChange, onDaysChange 
             >
               <span
                 className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform duration-200 ${
-                  showInflation ? "translate-x-4" : "translate-x-0.5"
+                  showInflation ? "translate-x-1.2" : "-translate-x-4"
                 }`}
               />
             </button>
