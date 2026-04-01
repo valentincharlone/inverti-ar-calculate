@@ -32,7 +32,7 @@ export function RecommendationBox({ rankings, instrument }: Props) {
         <RecommendationRow
           emoji="🏆"
           title="Mejor opción general"
-          broker={best.broker.name}
+          broker={best?.broker?.name}
           reason={`Score combinado más alto para ${instrument}`}
           color="text-emerald-400"
         />
@@ -45,7 +45,7 @@ export function RecommendationBox({ rankings, instrument }: Props) {
             color="text-violet-400"
           />
         )}
-        {bestCommission.broker.id !== best.broker.id && (
+        {bestCommission?.broker.id !== best?.broker.id && (
           <RecommendationRow
             emoji="💰"
             title="Si operás frecuentemente"

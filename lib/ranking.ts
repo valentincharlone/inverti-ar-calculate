@@ -4,7 +4,7 @@ import type { Broker, Bank, BrokerRanking, BankRanking, BadgeType } from "@/type
 
 function calcBrokerScore(
   broker: Broker,
-  instrument: "cedears" | "acciones" | "bonos"
+  instrument: "cedears" | "acciones" | "bonos" | "on" | "letras"
 ): number {
   const data = broker.instruments[instrument];
   if (!data) return 0;
@@ -17,7 +17,7 @@ function calcBrokerScore(
 
 export function rankBrokers(
   brokers: Broker[],
-  instrument: "cedears" | "acciones" | "bonos"
+  instrument: "cedears" | "acciones" | "bonos" | "on" | "letras"
 ): BrokerRanking[] {
   const eligible = brokers.filter((b) => b.instruments[instrument] != null);
 

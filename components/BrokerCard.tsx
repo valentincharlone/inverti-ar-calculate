@@ -43,6 +43,16 @@ export function BrokerCard({ ranking, index, isSelected = false, onToggle, canSe
           ) : (
             <span className="text-lg font-bold text-slate-500">#{rank}</span>
           )}
+          {broker.logo && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={broker.logo}
+              alt={broker.name}
+              width={28}
+              height={28}
+              className="rounded-md bg-white p-0.5"
+            />
+          )}
           <div>
             <h3 className="font-semibold text-white text-base">{broker.name}</h3>
             <p className="text-xs text-slate-400 capitalize">

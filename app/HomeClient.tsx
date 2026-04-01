@@ -15,6 +15,8 @@ const SECTION_LABELS: Record<InstrumentType, string> = {
   cedears: "CEDEARs — Ranking de brokers",
   acciones: "Acciones — Ranking de brokers",
   bonos: "Bonos — Ranking de brokers",
+  letras: "Letras del Tesoro — LECAPs y LECERs",
+  on: "Obligaciones Negociables — Deuda corporativa",
 };
 
 export function HomeClient() {
@@ -172,7 +174,7 @@ export function HomeClient() {
                 </AnimatePresence>
               </div>
             ) : (
-              <RankingList instrument={selected as "cedears" | "acciones" | "bonos"} />
+              <RankingList instrument={selected as "cedears" | "acciones" | "bonos" | "on" | "letras"} />
             )}
           </motion.section>
         )}

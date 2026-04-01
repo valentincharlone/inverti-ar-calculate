@@ -11,13 +11,15 @@ import { brokers } from "@/data/brokers";
 import type { BrokerRanking } from "@/types";
 
 interface Props {
-  instrument: "cedears" | "acciones" | "bonos";
+  instrument: "cedears" | "acciones" | "bonos" | "on" | "letras";
 }
 
 const INSTRUMENT_LABELS: Record<string, string> = {
   cedears: "CEDEARs",
   acciones: "Acciones",
   bonos: "Bonos",
+  on: "Obligaciones Negociables",
+  letras: "Letras del Tesoro",
 };
 
 type LevelFilter = "todos" | "principiante" | "intermedio" | "avanzado";

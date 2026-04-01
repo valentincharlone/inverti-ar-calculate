@@ -4,10 +4,13 @@ export const brokers: Broker[] = [
   {
     id: "iol",
     name: "InvertirOnline (IOL)",
+    logo: "https://www.google.com/s2/favicons?domain=invertironline.com&sz=64",
     instruments: {
       cedears: { commission: 0.5, minAmount: 100 },
       acciones: { commission: 0.5, minAmount: 100 },
       bonos: { commission: 0.25, minAmount: 100 },
+      on: { commission: 0.25, minAmount: 100 },
+      letras: { commission: 0.1, minAmount: 100 },
     },
     uxScore: 8.5,
     pros: [
@@ -29,10 +32,13 @@ export const brokers: Broker[] = [
   {
     id: "bullmarket",
     name: "Bull Market Brokers",
+    logo: "https://www.google.com/s2/favicons?domain=bullmarketbrokers.com&sz=64",
     instruments: {
       cedears: { commission: 0.3, minAmount: 500 },
       acciones: { commission: 0.3, minAmount: 500 },
       bonos: { commission: 0.2, minAmount: 500 },
+      on: { commission: 0.15, minAmount: 500 },
+      letras: { commission: 0.05, minAmount: 500 },
     },
     uxScore: 7.2,
     pros: [
@@ -53,10 +59,13 @@ export const brokers: Broker[] = [
   {
     id: "cocos",
     name: "Cocos Capital",
+    logo: "https://www.google.com/s2/favicons?domain=cocos.capital&sz=64",
     instruments: {
       cedears: { commission: 0.0, minAmount: 0 },
       acciones: { commission: 0.0, minAmount: 0 },
       bonos: { commission: 0.0, minAmount: 0 },
+      on: { commission: 0.0, minAmount: 0 },
+      letras: { commission: 0.0, minAmount: 0 },
     },
     uxScore: 9.2,
     pros: [
@@ -78,10 +87,13 @@ export const brokers: Broker[] = [
   {
     id: "balanz",
     name: "Balanz Capital",
+    logo: "https://www.google.com/s2/favicons?domain=balanz.com&sz=64",
     instruments: {
       cedears: { commission: 0.6, minAmount: 1000 },
       acciones: { commission: 0.6, minAmount: 1000 },
       bonos: { commission: 0.35, minAmount: 1000 },
+      on: { commission: 0.3, minAmount: 1000 },
+      letras: { commission: 0.15, minAmount: 1000 },
     },
     uxScore: 7.8,
     pros: [
@@ -103,10 +115,13 @@ export const brokers: Broker[] = [
   {
     id: "naranjaX",
     name: "Naranja X",
+    logo: "https://www.google.com/s2/favicons?domain=naranjax.com&sz=64",
     instruments: {
       cedears: { commission: 0.4, minAmount: 0 },
       acciones: { commission: 0.4, minAmount: 0 },
       bonos: { commission: 0.3, minAmount: 0 },
+      on: { commission: 0.3, minAmount: 0 },
+      letras: { commission: 0.1, minAmount: 0 },
     },
     uxScore: 8.8,
     pros: [
@@ -128,10 +143,13 @@ export const brokers: Broker[] = [
   {
     id: "portfolio",
     name: "Portfolio Personal",
+    logo: "https://www.google.com/s2/favicons?domain=portfoliopersonal.com&sz=64",
     instruments: {
       cedears: { commission: 0.35, minAmount: 200 },
       acciones: { commission: 0.35, minAmount: 200 },
       bonos: { commission: 0.25, minAmount: 200 },
+      on: { commission: 0.2, minAmount: 200 },
+      letras: { commission: 0.08, minAmount: 200 },
     },
     uxScore: 8.0,
     pros: [

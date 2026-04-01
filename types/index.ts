@@ -1,4 +1,4 @@
-export type InstrumentType = "plazo-fijo" | "cedears" | "acciones" | "bonos";
+export type InstrumentType = "plazo-fijo" | "cedears" | "acciones" | "bonos" | "letras" | "on";
 
 export type Broker = {
   id: string;
@@ -8,6 +8,8 @@ export type Broker = {
     cedears?: { commission: number; minAmount?: number };
     acciones?: { commission: number; minAmount?: number };
     bonos?: { commission: number; minAmount?: number };
+    on?: { commission: number; minAmount?: number };
+    letras?: { commission: number; minAmount?: number };
   };
   uxScore: number; // 1-10
   pros: string[];
@@ -35,7 +37,7 @@ export type Bank = {
 
 export type BrokerRanking = {
   broker: Broker;
-  instrument: "cedears" | "acciones" | "bonos";
+  instrument: "cedears" | "acciones" | "bonos" | "on" | "letras";
   score: number;
   commission: number;
   badges: BadgeType[];

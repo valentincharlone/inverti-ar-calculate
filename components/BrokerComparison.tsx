@@ -6,7 +6,7 @@ import type { BrokerRanking } from "@/types";
 
 interface Props {
   rankings: BrokerRanking[];
-  instrument: "cedears" | "acciones" | "bonos";
+  instrument: "cedears" | "acciones" | "bonos" | "on" | "letras";
   onClose: () => void;
 }
 

@@ -38,6 +38,20 @@ const INSTRUMENTS: {
     icon: "📄",
     color: "from-amber-600/30 to-amber-500/10 border-amber-500/40 hover:border-amber-400",
   },
+  {
+    id: "letras",
+    label: "Letras",
+    description: "LECAPs y LECERs del Tesoro",
+    icon: "🏛️",
+    color: "from-cyan-600/30 to-cyan-500/10 border-cyan-500/40 hover:border-cyan-400",
+  },
+  {
+    id: "on",
+    label: "Oblig. Neg.",
+    description: "Deuda corporativa en USD y ARS",
+    icon: "💼",
+    color: "from-rose-600/30 to-rose-500/10 border-rose-500/40 hover:border-rose-400",
+  },
 ];
 
 interface Props {
@@ -47,7 +61,7 @@ interface Props {
 
 export function InstrumentSelector({ selected, onChange }: Props) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
       {INSTRUMENTS.map((instrument, i) => (
         <motion.button
           key={instrument.id}
